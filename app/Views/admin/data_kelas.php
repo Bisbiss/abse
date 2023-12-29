@@ -169,7 +169,7 @@
                 <div class="row">
                     <label class="col-sm-3 control-label text-right">ID Wali Kelas<span class="text-red">*</span></label>
                     <div class="col-sm-8">
-                    <select name="wali_kelas" class="form-control select2" style="width: 100%;">
+                    <select name="wali_kelas" class="form-control select2" style="width: 100%;" requied>
                         <option value="" selected="selected">-- Pilih Guru --</option>
                         <?php
                         $query_guru = "SELECT * FROM guru";
