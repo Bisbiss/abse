@@ -66,6 +66,20 @@
     });
   });
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var keteranganSelect = document.getElementById('Keterangan');
+    var submitButton = document.querySelector('[name="submit"]');
+
+    keteranganSelect.addEventListener('change', function() {
+      submitButton.disabled = this.value === ''; // Tombol dinonaktifkan jika tidak ada opsi yang dipilih
+    });
+
+    // Inisialisasi status disabled berdasarkan opsi yang dipilih saat memuat halaman
+    submitButton.disabled = keteranganSelect.value === '';
+  });
+</script>
+
 </body>
 
 </html>
