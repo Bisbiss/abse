@@ -11,8 +11,8 @@ class Telegram extends BaseController
         $chatId = '1146265784';
 
         $curl = curl_init();
-        $photo = 'https://absensi.mawedding.my.id/assets/absen/capture/'.$image;
-        // $photo = 'https://picsum.photos/200';
+        // $photo = 'https://absensi.mawedding.my.id/assets/absen/capture/'.$image;
+        $photo = 'https://picsum.photos/200';
 
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://api.telegram.org/bot6406105621:AAFMQNcRcZi6bbqKgooaHqORzhx1BWmaLW0/sendPhoto',
