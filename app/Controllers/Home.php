@@ -6,6 +6,7 @@ use App\Models\UsersModel;
 use App\Models\AbsensiModel;
 use App\Models\SiswaModel;
 use App\Models\InvalidCardModel;
+use App\Controllers\Telegram;
 
 class Home extends BaseController
 {
@@ -47,8 +48,8 @@ class Home extends BaseController
 
     public function absensi()
     {
+        $db = db_connect();
         $absensi = new AbsensiModel();
-        $siswa = new SiswaModel();
         $this->validate([
             'imageFile' => 'uploaded[imageFile]|mime_in[imageFile,image/png,image/jpeg]',
         ]);
@@ -58,7 +59,7 @@ class Home extends BaseController
             $newName = $img->getRandomName();
             $filepath = ROOTPATH.'public/assets/absen/capture/';
             $img->move($filepath,$newName);
-            $cek = $siswa->find($id_siswa);
+            $cek = $db->query('SELECT Nama_Siswa FROM siswa WHERE ID_Siswa='.$id_siswa)->getRow();
             if($cek){
                 $data = [
                     'ID_Siswa' => $id_siswa,
@@ -69,7 +70,9 @@ class Home extends BaseController
                 ];
                 $tambah = $absensi->insert($data);
                 if($tambah){
+                    $telegram = new Telegram();
                     echo "Berhasil Absen";
+                    $telegram->send($newName,$cek->Nama_Siswa);
                 }else{
                     echo "Gagal Absen";
                 }
