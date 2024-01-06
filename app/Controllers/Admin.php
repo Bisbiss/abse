@@ -449,12 +449,34 @@ class Admin extends BaseController
             return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
         }
         $data = [
-            'title' => 'Laporan'
+            'title' => 'Laporan',
         ];
         echo view('admin/layout/header', $data);
         echo view('admin/layout/navigation');
         echo view('admin/laporan');
-        echo view('admin/layout/footer');
+        // echo view('admin/layout/footer');
+    }
+
+    public function cetakLaporan()
+    {
+        $db = db_connect();
+        $session = session();
+        if ($session->get('level') != 'admin') {
+            return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
+        }
+        $tglrange = $this->request->getPost('tglrange');
+        $kelas = $this->request->getPost('kelas');
+        $date = explode(" - ", $tglrange);
+        $p1 = date("Y-m-d", strtotime($date[0]));
+        $p2 = date("Y-m-d", strtotime($date[1]));
+        $data = [
+            'tglrange' => $tglrange,
+            'kelas' => $kelas,
+            'date' => $date,
+            'p1' => $p1,
+            'p2' => $p2
+        ];
+        echo view('admin/template_pdf', $data);
     }
 
     public function pengaturan()

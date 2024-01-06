@@ -200,7 +200,7 @@ $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabt
                                 <div class="card-body overflow-auto">
                                     <?php if ($act == '') { ?>
                                         <form method="GET" id="frmlap">
-                                            <div class="col-md-12 row">
+                                            <div class="col-md-12 row ">
                                                 <div class="col-md-5">
                                                     <div class="form-group row">
                                                         <label class="aria-label col-md-4">Range Tanggal</label>
@@ -210,7 +210,7 @@ $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabt
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-5">
                                                     <div class="form-group row">
                                                         <label class="col-md-4 control-label ">Kelas </label>
                                                         <div class="col-md-8">
@@ -229,13 +229,19 @@ $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabt
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-1">
                                                     <input type="hidden" name="cari" value="cr">
-                                                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
-                                                    <button type="button" class="btn btn-primary" onclick="cetak_absen()"><i class="fas fa-print"></i></button>
+                                                    <button type="submit" class="btn btn-success" style="float:right"><i class="fas fa-search"></i></button>
+                                                </div>
+                                            </form>
+                                                <div class="col-md-1">
+                                                    <form action="<?= base_url().'admin/cetaklaporan' ?>" method="post">
+                                                        <input type="hidden" name="tglrange" value="<?= $tglrange ?>">
+                                                        <input type="hidden" name="kelas" value="<?= $kelas ?>">
+                                                        <button type="submit" class="btn btn-primary d-block"><i class="fas fa-print"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </form>
                                     <?php } ?>
                                     <div class="table-responsive">
                                         <?php
@@ -409,48 +415,63 @@ $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabt
 
         </div>
         <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            All rights reserved.
+        </footer>
+
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
+        <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
 
-        <!-- Main Footer -->
-
-    </div>
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
-
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Select2 -->
-    <script src="plugins/select2/js/select2.full.min.js"></script>
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-    <!-- InputMask -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
-    <!-- date-range-picker -->
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Bootstrap Switch -->
-    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-
+        <!-- jQuery -->
+        <script src="<?= base_url() . 'assets/plugins/jquery/jquery.min.js' ?>"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="<?= base_url() . 'assets/plugins/jquery-ui/jquery-ui.min.js' ?>"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+        $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="<?= base_url() . 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' ?>"></script>
+        <!-- ChartJS -->
+        <script src="<?= base_url() . 'assets/plugins/chart.js/Chart.min.js' ?>"></script>
+        <!-- Sparkline -->
+        <script src="<?= base_url() . 'assets/plugins/sparklines/sparkline.js' ?>"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="<?= base_url() . 'assets/plugins/jquery-knob/jquery.knob.min.js' ?>"></script>
+        <!-- daterangepicker -->
+        <script src="<?= base_url() . 'assets/plugins/moment/moment.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/daterangepicker/daterangepicker.js' ?>"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="<?= base_url() . 'assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' ?>"></script>
+        <!-- Summernote -->
+        <script src="<?= base_url() . 'assets/plugins/summernote/summernote-bs4.min.js' ?>"></script>
+        <!-- overlayScrollbars -->
+        <script src="<?= base_url() . 'assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
+        <!-- AdminLTE App -->
+        <script src="<?= base_url() . 'assets/js/adminlte.js' ?>"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="<?= base_url() . 'assets/js/pages/dashboard.js' ?>"></script>
+        <!-- DataTables -->
+        <script src="<?= base_url() . 'assets/plugins/datatables/jquery.dataTables.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-buttons/js/dataTables.buttons.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/jszip/jszip.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/pdfmake/pdfmake.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/pdfmake/vfs_fonts.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-buttons/js/buttons.html5.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-buttons/js/buttons.print.min.js' ?>"></script>
+        <script src="<?= base_url() . 'assets/plugins/datatables-buttons/js/buttons.colVis.min.js' ?>"></script>
 
     <script>
+
         var date2 = new Date();
         date2.setDate(date2.getDate());
         $('#reservation').daterangepicker({
@@ -461,26 +482,6 @@ $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabt
             }
 
         })
-
-
-        $(function() {
-            $('.select2').select2();
-        })
-
-        function cetak_absen() {
-            $.ajax({
-                url: 'cetak_laporan.php',
-                data: $('#frmlap').serialize(),
-                type: 'GET',
-                dataType: 'html',
-                success: function(respon) {
-                    /$("#load").html(respon);/
-                    var doc = window.open();
-                    doc.document.write(respon);
-                    doc.print();
-                }
-            })
-        }
     </script>
 </body>
 

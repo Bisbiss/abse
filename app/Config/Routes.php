@@ -32,4 +32,5 @@ $routes->post('/admin/presensi', 'Admin::presensi');
 $routes->get('/admin/invalidcard', 'Admin::invalidCard');
 $routes->post('/admin/convertdata', 'Admin::convertInvalidCard');
 $routes->get('/admin/laporan', 'Admin::laporan');
+$routes->post('/admin/cetaklaporan', 'Admin::cetakLaporan');
 $routes->get('/admin/pengaturan', 'Admin::pengaturan');
