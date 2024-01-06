@@ -41,9 +41,38 @@ class Admin extends BaseController
             return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
         }
         $data = [
-            'title' => 'Data Siswa',
-            'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
-        ];
+                'title' => 'Data Siswa',
+                'kelas' => '',
+                'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
+            ];
+        
+        echo view('admin/layout/header', $data);
+        echo view('admin/layout/navigation');
+        echo view('admin/data_siswa');
+        echo view('admin/layout/footer');
+    }
+    
+    public function filterDataSiswa()
+    {
+        $db = db_connect();
+        $session = session();
+        if ($session->get('level') != 'admin') {
+            return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
+        }
+        $kelas = $this->request->getPost('kelas');
+        if($kelas == NULL){
+            $data = [
+                'title' => 'Data Siswa',
+                'kelas' => '',
+                'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
+            ];
+        }else{
+            $data = [
+                'title' => 'Data Siswa',
+                'kelas' => $kelas,
+                'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas WHERE s.ID_Kelas=$kelas ORDER BY s.Nama_Siswa")->getResult(),
+            ];
+        }
         echo view('admin/layout/header', $data);
         echo view('admin/layout/navigation');
         echo view('admin/data_siswa');

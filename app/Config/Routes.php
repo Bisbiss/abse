@@ -13,6 +13,7 @@ $routes->post('/absen', 'Home::absensi');
 // Route Admin
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/datasiswa', 'Admin::dataSiswa');
+$routes->post('/admin/datasiswa', 'Admin::filterDataSiswa');
 $routes->post('/admin/tambahsiswa', 'Admin::tambahDataSiswa');
 $routes->post('/admin/ubahsiswa', 'Admin::ubahDataSiswa');
 $routes->get('/admin/hapussiswa/(:num)', 'Admin::hapusDataSiswa/$1');

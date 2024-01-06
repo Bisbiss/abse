@@ -42,6 +42,38 @@
                         </div>
 
                         <div class="card-body overflow-auto">
+                            <form method="POST" action="<?= base_url().'admin/datasiswa' ?>">
+                                <div class="col-md-12 row justify-content-end">
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 control-label ">
+                                                Kelas
+                                            </label>
+                                            <div class="col-md-8">
+                                                <select name="kelas" class="form-control select2 " style="width: 100%;">
+                                                    <option value="" selected="selected">-- Pilih Kelas --</option>
+                                                    <?php
+                                                    $db = db_connect();
+                                                    $query_kelas = "SELECT ID_Kelas, Nama_Kelas FROM kelas";
+                                                    $result = $db->query($query_kelas)->getResult();
+                                                    foreach($result as $result) {
+                                                        if(isset($kelas)){
+                                                            $sel = ($kelas == $result->ID_Kelas) ? 'selected' : '';
+                                                            echo '<option value="' . $result->ID_Kelas . '" ' . $sel . '>' . $result->Nama_Kelas . '</option>';
+                                                        }else{
+                                                            echo '<option value="' . $result->ID_Kelas . '">' . $result->Nama_Kelas . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-success" style="float:right"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
