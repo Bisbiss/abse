@@ -59,7 +59,7 @@ class Home extends BaseController
             $newName = $img->getRandomName();
             $filepath = ROOTPATH.'public/assets/absen/capture/';
             $img->move($filepath,$newName);
-            $cek = $db->query('SELECT Nama_Siswa FROM siswa WHERE ID_Siswa='.$id_siswa)->getRow();
+            $cek = $db->query('SELECT Nama_Siswa,chat_id FROM siswa WHERE ID_Siswa='.$id_siswa)->getRow();
             if($cek){
                 $data = [
                     'ID_Siswa' => $id_siswa,
@@ -70,9 +70,10 @@ class Home extends BaseController
                 ];
                 $tambah = $absensi->insert($data);
                 if($tambah){
+                    $caption = $cek->Nama_Siswa.' Telah melakukan presensi pada pukul '.date('H:i:s');
                     $telegram = new Telegram();
                     echo "Berhasil Absen";
-                    $telegram->send($newName,$cek->Nama_Siswa);
+                    $telegram->send($newName,$caption,$cek->chat_id);
                 }else{
                     echo "Gagal Absen";
                 }

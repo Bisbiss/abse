@@ -6,10 +6,8 @@ namespace App\Controllers;
 class Telegram extends BaseController
 {
 
-    function send($image, $caption)
+    function send($image, $caption, $chatId)
     {
-        $chatId = '1146265784';
-
         $curl = curl_init();
         // $photo = 'https://absensi.mawedding.my.id/assets/absen/capture/'.$image;
         $photo = 'https://picsum.photos/200';
