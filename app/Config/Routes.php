@@ -28,6 +28,7 @@ $routes->post('/admin/tambahdataguru', 'Admin::tambahDataGuru');
 $routes->post('/admin/ubahguru', 'Admin::ubahDataGuru');
 $routes->get('/admin/hapusguru/(:num)', 'Admin::hapusDataGuru/$1');
 $routes->get('/admin/dataabsen', 'Admin::dataAbsen');
+$routes->post('/admin/ubahAbsen', 'Admin::ubahAbsen');
 $routes->get('/admin/belumabsen', 'Admin::belumAbsen');
 $routes->post('/admin/presensi', 'Admin::presensi');
 $routes->get('/admin/invalidcard', 'Admin::invalidCard');

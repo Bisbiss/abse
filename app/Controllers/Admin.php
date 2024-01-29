@@ -41,17 +41,17 @@ class Admin extends BaseController
             return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
         }
         $data = [
-                'title' => 'Data Siswa',
-                'kelas' => '',
-                'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
-            ];
-        
+            'title' => 'Data Siswa',
+            'kelas' => '',
+            'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
+        ];
+
         echo view('admin/layout/header', $data);
         echo view('admin/layout/navigation');
         echo view('admin/data_siswa');
         echo view('admin/layout/footer');
     }
-    
+
     public function filterDataSiswa()
     {
         $db = db_connect();
@@ -60,13 +60,13 @@ class Admin extends BaseController
             return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
         }
         $kelas = $this->request->getPost('kelas');
-        if($kelas == NULL){
+        if ($kelas == NULL) {
             $data = [
                 'title' => 'Data Siswa',
                 'kelas' => '',
                 'data' => $db->query("SELECT s.*, k.Nama_Kelas,k.ID_Kelas FROM siswa s JOIN kelas k ON s.ID_Kelas = k.ID_Kelas ORDER BY s.Nama_Siswa")->getResult(),
             ];
-        }else{
+        } else {
             $data = [
                 'title' => 'Data Siswa',
                 'kelas' => $kelas,
@@ -372,6 +372,26 @@ class Admin extends BaseController
         echo view('admin/layout/footer');
     }
 
+    public function ubahAbsen()
+    {
+        $db = db_connect();
+        $session = session();
+        if ($session->get('level') != 'admin') {
+            return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
+        }
+        $guru = new AbsensiModel();
+        $ID_Absensi = $this->request->getPost('id_absen');
+        $data = [
+            'Keterangan' => $this->request->getPost('Keterangan'),
+        ];
+        $ubah = $guru->update($ID_Absensi, $data);
+        if ($ubah) {
+            return redirect()->back()->with('success', 'Behasil Ubah Data!');
+        } else {
+            return redirect()->back()->with('failed', 'Gagal Ubah Data!');
+        }
+    }
+
     public function belumAbsen()
     {
         $db = db_connect();
@@ -421,8 +441,6 @@ class Admin extends BaseController
             return redirect()->back()->with('failed', $namaSiswa . 'Gagal Presensi! ' . $presensi->error());
         }
     }
-
-
 
     public function invalidCard()
     {
