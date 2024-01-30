@@ -211,7 +211,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                            </div>
                                         </tr>
                                     <?php
                                         $no++;

@@ -385,16 +385,32 @@ class Admin extends BaseController
         if ($session->get('level') != 'admin') {
             return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
         }
-        $guru = new AbsensiModel();
+        $absensi = new AbsensiModel();
         $ID_Absensi = $this->request->getPost('id_absen');
         $data = [
             'Keterangan' => $this->request->getPost('Keterangan'),
         ];
-        $ubah = $guru->update($ID_Absensi, $data);
+        $ubah = $absensi->update($ID_Absensi, $data);
         if ($ubah) {
             return redirect()->back()->with('success', 'Behasil Ubah Data!');
         } else {
             return redirect()->back()->with('failed', 'Gagal Ubah Data!');
+        }
+    }
+
+    public function hapusAbsen($ID_Absensi = NULL)
+    {
+        $db = db_connect();
+        $session = session();
+        if ($session->get('level') != 'admin') {
+            return redirect()->to('/')->with('message', 'Gagal Memuat Halaman!');
+        }
+        $absensi = new AbsensiModel();
+        $hapus = $absensi->delete($ID_Absensi);
+        if ($hapus) {
+            return redirect()->back()->with('success', 'Berhasil Hapus Data!');
+        } else {
+            return redirect()->back()->with('failed', 'Gagal Hapus Data!');
         }
     }
 

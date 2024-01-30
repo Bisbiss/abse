@@ -68,11 +68,11 @@
                                                     <img src=" <?= base_url('assets/absen/avatar/user.png') ?>" class="img-fluid" width="100px">
                                                 <?php endif; ?>
                                             </td>
-                                            <td><a href="#" class="btn btn-warning btn-flat btn-xs" data-toggle="modal" data-target="<?= '#ubah' . $no ?>"><i class="fas fa-pen"></i> Ubah</a> </td>
+                                            <td><a href="#" class="btn btn-warning btn-flat btn-xs" data-toggle="modal" data-target="<?= '#ubah' . $no ?>"><i class="fas fa-pen"></i> Ubah</a> <a href="#" class="btn btn-danger btn-flat btn-xs" data-toggle="modal" data-target="<?= '#hapus' . $no ?>"><i class="fas fa-pen"></i> Hapus</a></td>
 
                                         </tr>
 
-                                        <!-- modal presensi -->
+                                        <!-- modal Ubah Absensi -->
                                         <div class="example-modal">
                                             <div id="<?= 'ubah' . $no ?>" class="modal fade" role="dialog" style="display:none;">
                                                 <div class="modal-dialog">
@@ -107,6 +107,53 @@
                                                 </div>
                                             </div>
                                             <!-- endModalPresensi -->
+
+                                            <!-- Modal Hapus Absesnsi -->
+                                            <div class="example-modal">
+                                                <div id="<?= 'hapus' . $no ?>" class="modal fade" role="dialog" style="display:none;">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title">Konfirmasi Hapus Data Absensi</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4 class="text-center">
+                                                                    Apakah anda yakin ingin menghapus Absensi?
+                                                                </h4>
+                                                                <div class="row">
+                                                                    <label class="col-sm-3 control-label text-right">Nama</label>
+                                                                    <div class="col-sm-8">
+                                                                        <label for="">: <?= $data->Nama_Siswa; ?></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="col-sm-3 control-label text-right">Tanggal</label>
+                                                                    <div class="col-sm-8">
+                                                                        <?php
+
+                                                                        $tanggalAbsensi = date('d-m-Y', strtotime($data->Waktu_Absensi));
+                                                                        $jamAbsensi = date('H:i', strtotime($data->Waktu_Absensi));
+
+                                                                        ?>
+                                                                        <label for="">: <?= $tanggalAbsensi; ?></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="col-sm-3 control-label text-right">Jam</label>
+                                                                    <div class="col-sm-8">
+                                                                        <label for="">: <?= $jamAbsensi; ?> WIB</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button id="nodelete" type="button" class="btn btn-light pull-left" data-dismiss="modal">Batal</button>
+                                                                <a href="<?= '/admin/hapusAbsen/' . $data->ID_Absensi ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Hapus Absensi -->
 
                                         <?php
                                         $no++;
