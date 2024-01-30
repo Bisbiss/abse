@@ -102,6 +102,7 @@ class Admin extends BaseController
                 'Jenis_Kelamin' => $this->request->getPost('jenis_kelamin'),
                 'ID_Kelas' => $this->request->getPost('kelas'),
                 'foto_siswa' => $newName,
+                'chat_id' => $this->request->getPost('chat_id'),
             ];
 
             $tambah = $siswa->insert($data);
@@ -131,6 +132,7 @@ class Admin extends BaseController
             'Alamat' => $this->request->getPost('alamat'),
             'Jenis_Kelamin' => $this->request->getPost('jenis_kelamin'),
             'ID_Kelas' => $this->request->getPost('kelas'),
+            'chat_id' => $this->request->getPost('chat_id'),
         ];
 
         $ubah = $siswa->update($ID_Siswa, $data);
@@ -364,7 +366,11 @@ class Admin extends BaseController
         }
         $data = [
             'title' => 'Data Absen',
-            'data' => $db->query("SELECT absensi.*, siswa.Nama_Siswa,siswa.Jenis_Kelamin,siswa.NIS,kelas.Nama_Kelas FROM absensi JOIN siswa ON absensi.ID_Siswa=siswa.ID_Siswa JOIN kelas ON siswa.ID_Kelas=kelas.ID_Kelas")->getResult(),
+            'data' => $db->query("SELECT absensi.*, siswa.Nama_Siswa, siswa.Jenis_Kelamin, siswa.NIS, kelas.Nama_Kelas 
+            FROM absensi 
+            JOIN siswa ON absensi.ID_Siswa = siswa.ID_Siswa 
+            JOIN kelas ON siswa.ID_Kelas = kelas.ID_Kelas 
+            ORDER BY absensi.Waktu_Absensi DESC;")->getResult(),
         ];
         echo view('admin/layout/header', $data);
         echo view('admin/layout/navigation');

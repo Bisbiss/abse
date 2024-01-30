@@ -43,8 +43,8 @@
                                         <th>NIS</th>
                                         <th>Kelas</th>
                                         <th>Waktu</th>
-                                        <th>Foto</th>
                                         <th>Keterangan</th>
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -63,9 +63,9 @@
                                             <td><?= $data->Keterangan; ?></td>
                                             <td>
                                                 <?php if (isset($data->foto_siswa) && !empty($data->foto_siswa)) : ?>
-                                                    <img src="<?= base_url('assets/absen/capture/' . $data->foto_siswa) ?>" class="img-fluid rotated" width="100px">
+                                                    <img src="<?= base_url('assets/absen/capture/' . $data->foto_siswa) ?>" class="img-fluid rotated" width="100px" style="margin-top: 10px; margin-bottom: 10px;">
                                                 <?php else : ?>
-                                                    <img src="<?= base_url('assets/absen/avatar/user.png') ?>" class="img-fluid" width="100px">
+                                                    <img src=" <?= base_url('assets/absen/avatar/user.png') ?>" class="img-fluid" width="100px">
                                                 <?php endif; ?>
                                             </td>
                                             <td><a href="#" class="btn btn-warning btn-flat btn-xs" data-toggle="modal" data-target="<?= '#ubah' . $no ?>"><i class="fas fa-pen"></i> Ubah</a> </td>
